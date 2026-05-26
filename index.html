@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#120b1d" />
+<title>Uptown Sundown – Band Setlist Designer & Guide</title>
+<style>
+:root{
+  --bg:#110b16; --panel:#211725f4; --panel2:#2d2230f7; --ink:#fff5d9; --muted:#c9bca4;
+  --gold:#ffc85a; --orange:#ff8b3d; --purple:#9c68ff; --teal:#52f6d0; --red:#ff5b6e;
+  --line:rgba(255,200,90,.28); --shadow:0 18px 60px rgba(0,0,0,.45); --radius:22px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;min-height:100%;background:#110b16;color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;overscroll-behavior:none;touch-action:manipulation;}
+button,input,select,textarea{font:inherit;color:inherit;}
+button{cursor:pointer;border:0;}
+body::before{content:"";position:fixed;inset:0;z-index:-3;background:
+ radial-gradient(circle at 12% 10%, rgba(255,139,61,.16), transparent 25%),
+ radial-gradient(circle at 88% 20%, rgba(82,246,208,.12), transparent 24%),
+ radial-gradient(circle at 50% 86%, rgba(156,104,255,.16), transparent 30%),
+ linear-gradient(135deg,#100815,#1c1224 42%,#130e18);
+}
+body::after{content:"";position:fixed;inset:0;z-index:-2;opacity:.34;pointer-events:none;background-image:
+ linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+ radial-gradient(circle,rgba(255,200,90,.45) 0 1px, transparent 1.5px);
+ background-size:36px 36px,36px 36px,23px 23px;mix-blend-mode:screen;}
+.hidden{display:none!important}.tiny{font-size:.74rem;color:var(--muted)}.nowrap{white-space:nowrap}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:5px 9px;background:rgba(255,255,255,.055);color:#ffe6a4;font-size:.75rem;}
+.home{min-height:100svh;display:grid;place-items:center;padding:22px;position:relative;overflow:hidden;}
+.home-card{width:min(780px,100%);min-height:min(650px,90svh);padding:34px 20px 24px;border:1px solid rgba(255,200,90,.35);border-radius:32px;background:
+ linear-gradient(180deg,rgba(43,25,49,.82),rgba(14,8,20,.88)),
+ radial-gradient(circle at 50% 0%,rgba(255,200,90,.18),transparent 45%);
+ box-shadow:0 0 0 1px rgba(82,246,208,.16) inset,0 30px 90px rgba(0,0,0,.65);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
+.home-card::before{content:"";position:absolute;inset:14px;border-radius:24px;border:1px dashed rgba(255,200,90,.25);pointer-events:none;}
+.home-card::after{content:"♪ ♫ ♬";position:absolute;bottom:92px;letter-spacing:22px;font-size:24px;color:rgba(82,246,208,.20);filter:blur(.1px);}
+.pixel-title{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;text-transform:uppercase;letter-spacing:.08em;line-height:.9;font-size:clamp(2.5rem,13vw,6.7rem);margin:0 0 10px;color:#ffe08a;text-shadow:
+ 2px 0 #ff7b3a,-2px 0 #52f6d0,0 2px #9c68ff,0 0 12px rgba(255,200,90,.95),0 0 30px rgba(255,139,61,.55);
+ filter:drop-shadow(0 0 16px rgba(255,200,90,.35));}
+.pixel-title span{display:inline-block;padding:8px 10px;border:2px solid rgba(255,200,90,.42);box-shadow:0 0 0 5px rgba(255,200,90,.04),0 0 26px rgba(255,200,90,.24) inset;background-image:radial-gradient(circle,rgba(255,255,255,.42) 1px,transparent 1.6px);background-size:8px 8px;border-radius:10px;}
+.subtitle{margin:6px 0 28px;color:#f7e8c3;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:clamp(.82rem,3vw,1rem)}
+.launch{padding:14px 28px;border-radius:999px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#241000;font-weight:900;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 10px 30px rgba(255,139,61,.35),0 0 0 4px rgba(255,200,90,.12);}
+.launch:active{transform:translateY(1px) scale(.99)}
+.home-footer{position:absolute;bottom:18px;left:18px;right:18px;font-size:.64rem;color:rgba(255,245,217,.58);}
+.app{height:100svh;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{position:sticky;top:0;z-index:20;padding:10px 10px calc(8px + env(safe-area-inset-top));background:linear-gradient(180deg,rgba(17,11,22,.98),rgba(17,11,22,.82));border-bottom:1px solid rgba(255,200,90,.22);backdrop-filter:blur(14px);}
+.brandrow{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.brand{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;font-weight:900;color:#ffe08a;text-shadow:0 0 10px rgba(255,200,90,.7);font-size:.96rem;}
+.top-actions{display:flex;gap:6px;align-items:center;}
+.btn{border:1px solid rgba(255,200,90,.28);background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border-radius:13px;padding:9px 10px;color:#fff5d9;box-shadow:0 0 0 1px rgba(82,246,208,.08) inset;}
+.btn.small{font-size:.78rem;padding:7px 9px;border-radius:11px}.btn.gold{background:linear-gradient(135deg,rgba(255,200,90,.98),rgba(255,139,61,.94));color:#201000;font-weight:900}.btn.teal{border-color:rgba(82,246,208,.4);color:#d7fff7}.btn.danger{border-color:rgba(255,91,110,.5);color:#ffd5d9}.btn.active{background:linear-gradient(135deg,rgba(82,246,208,.22),rgba(255,200,90,.18));border-color:rgba(82,246,208,.55)}
+.statusline{margin-top:8px;display:flex;gap:6px;overflow:auto;padding-bottom:2px;scrollbar-width:none}.statusline::-webkit-scrollbar{display:none}
+.workspace{flex:1;overflow:auto;padding:10px 10px 90px;display:grid;gap:10px;grid-template-columns:1fr;}
+.panel{border:1px solid rgba(255,200,90,.23);background:linear-gradient(180deg,var(--panel),rgba(18,12,22,.95));box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden;}
+details.panel>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:13px 14px;font-weight:900;color:#ffe6a4;letter-spacing:.04em;background:linear-gradient(90deg,rgba(255,200,90,.13),rgba(82,246,208,.055));}
+details.panel>summary::-webkit-details-marker{display:none}.chev{opacity:.75}.panel-body{padding:12px;}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.controls .wide{grid-column:1 / -1}
+.input,select,textarea{width:100%;background:rgba(0,0,0,.22);border:1px solid rgba(255,200,90,.25);border-radius:13px;padding:11px 10px;color:#fff7df;outline:none;}
+.input:focus,select:focus,textarea:focus{border-color:rgba(82,246,208,.65);box-shadow:0 0 0 3px rgba(82,246,208,.1)}
+.list{display:grid;gap:8px;max-height:52svh;overflow:auto;padding-right:2px;scrollbar-color:rgba(255,200,90,.35) transparent;}
+.song-card{border:1px solid rgba(255,200,90,.18);border-radius:17px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.028));padding:10px;position:relative;overflow:hidden;}
+.song-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--gold),var(--teal));opacity:.55}.song-main{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.song-title{font-weight:900;font-size:.98rem}.song-artist{color:var(--muted);font-size:.78rem;margin-top:2px}.song-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.song-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.transpose-badge{font-family:ui-monospace,monospace;font-size:1rem;font-weight:900;color:#120a0c;background:#ffe08a;border-radius:12px;padding:6px 9px;box-shadow:0 0 18px rgba(255,200,90,.25)}
+.detail-grid{display:grid;gap:8px}.info-table{display:grid;grid-template-columns:92px 1fr;gap:6px 8px;font-size:.9rem}.info-table b{color:#ffe6a4}.chordbox{white-space:pre-wrap;line-height:1.38;background:rgba(0,0,0,.22);border:1px solid rgba(255,200,90,.19);border-radius:14px;padding:10px;color:#fff2d2;}
+.piano-wrap{border:1px solid rgba(82,246,208,.25);border-radius:18px;background:rgba(0,0,0,.18);padding:10px;}.piano{display:grid;grid-template-columns:repeat(12,minmax(48px,1fr));gap:5px;overflow-x:auto;padding-bottom:4px;}.key{min-height:88px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:8px 4px;border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 -12px 20px rgba(0,0,0,.16)}.key.white{background:linear-gradient(180deg,#fff9e7,#e5d6b2);color:#1a1020}.key.black{background:linear-gradient(180deg,#2d2532,#0c0910);color:#f4dfad;border-color:rgba(255,200,90,.24)}.phys{font-size:.66rem;opacity:.7;text-transform:uppercase}.sound{font-weight:1000;font-size:1.05rem}.medley-list{display:grid;gap:7px}.suggestion{border:1px solid rgba(156,104,255,.25);border-radius:14px;padding:9px;background:rgba(156,104,255,.08)}
+.setlist-head{display:grid;grid-template-columns:1fr 1fr;gap:8px}.setlist-tools{display:flex;gap:6px;overflow:auto;padding:8px 0;scrollbar-width:none}.setlist-tools::-webkit-scrollbar{display:none}.setlist{display:grid;gap:8px}.setitem{border:1px solid rgba(255,200,90,.2);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border-radius:16px;padding:9px;display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:start}.handle{font-size:1.15rem;color:#ffe08a;padding-top:3px;cursor:grab}.setitem.dragging{opacity:.5}.set-title{font-weight:900}.set-sub{font-size:.75rem;color:var(--muted);margin-top:2px}.set-chords{grid-column:2 / 4;font-size:.76rem;color:#ffe8b5;line-height:1.3;background:rgba(0,0,0,.16);border-radius:10px;padding:7px;margin-top:2px}.set-buttons{display:flex;gap:4px;flex-direction:column}.totals{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.jam-form{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.jam-form .wide{grid-column:1 / -1}.export-preview{position:absolute;left:-9999px;top:0;background:#fff;color:#111;width:860px;padding:28px;font-family:Arial,sans-serif}.export-preview h1{font-size:28px;margin:0 0 4px}.export-preview .meta{font-size:13px;color:#555;margin-bottom:14px}.export-preview table{width:100%;border-collapse:collapse;font-size:12px}.export-preview th,.export-preview td{border:1px solid #bbb;padding:6px;text-align:left;vertical-align:top}.export-preview th{background:#111;color:#fff}.export-preview .ch{font-size:10.5px;line-height:1.25}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;background:#1b1221;border:1px solid rgba(255,200,90,.4);border-radius:999px;padding:10px 14px;box-shadow:var(--shadow);color:#fff7d6;max-width:90%;text-align:center}.bottom-tabs{position:fixed;left:0;right:0;bottom:0;z-index:25;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(17,11,22,.48),rgba(17,11,22,.98));border-top:1px solid rgba(255,200,90,.20);display:grid;grid-template-columns:repeat(4,1fr);gap:6px;backdrop-filter:blur(13px)}.tabbtn{padding:9px 5px;border-radius:13px;font-size:.75rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,200,90,.18);color:#fff2d2}.tabbtn.active{background:linear-gradient(135deg,rgba(255,200,90,.20),rgba(82,246,208,.12));border-color:rgba(255,200,90,.45)}
+@media(min-width:900px){.workspace{grid-template-columns:minmax(340px, .82fr) 1.18fr;align-items:start}.list{max-height:68svh}.panel.sticky{position:sticky;top:96px}.bottom-tabs{display:none}.app{overflow:hidden}.workspace{padding-bottom:16px}.topbar{padding-top:10px}}
+@media(max-width:430px){.controls{grid-template-columns:1fr}.setlist-head,.jam-form{grid-template-columns:1fr}.pixel-title{font-size:clamp(2.1rem,16vw,4.2rem)}.top-actions .btn.small{padding:7px 8px}.brand{font-size:.82rem}.info-table{grid-template-columns:78px 1fr}.song-title{font-size:.92rem}.piano{grid-template-columns:repeat(12,46px)}.key{min-height:82px}.setitem{grid-template-columns:auto 1fr}.set-buttons{grid-column:1 / 3;flex-direction:row}.set-chords{grid-column:1 / 3}.home-card{min-height:88svh}}
+@media print{body{background:white;color:#111}.home,.topbar,.workspace,.bottom-tabs,.toast{display:none!important}.print-sheet{display:block!important}.export-preview{position:static!important;left:auto!important;width:auto!important;box-shadow:none!important}.export-preview table{font-size:10px}.export-preview th{background:#111!important;color:white!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<section id="home" class="home">
+  <div class="home-card">
+    <h1 class="pixel-title"><span>Uptown<br>Sundown</span></h1>
+    <div class="subtitle">Band Setlist Designer &amp; Guide</div>
+    <button id="launchBtn" class="launch">Launch App</button>
+    <div class="home-footer">*This app is exclusively for Uptown Sundown members/guest musicians. DO NOT SHARE!</div>
+  </div>
+</section>
+
+<section id="app" class="app hidden" aria-label="Uptown Sundown Setlist App">
+  <header class="topbar">
+    <div class="brandrow">
+      <div class="brand">UPTOWN SUNDOWN</div>
+      <div class="top-actions">
+        <button class="btn small" id="homeBtn">Home</button>
+        <button class="btn small teal" id="buildBtn">Build: Off</button>
+        <button class="btn small gold" id="quickSetBtn">Setlist</button>
+      </div>
+    </div>
+    <div class="statusline" id="statusLine"></div>
+  </header>
+
+  <main class="workspace">
+    <details class="panel sticky" id="databasePanel" open>
+      <summary>Song Database <span class="chev">▾</span></summary>
+      <div class="panel-body">
+        <div class="controls">
+          <input id="searchInput" class="input wide" placeholder="Search song, artist, key, chords…" />
+          <select id="sortSelect"><option value="az">A–Z song</option><option value="genre">Genre</option><option value="sax">Sax type</option><option value="bpm">BPM low → high</option><option value="bpmDesc">BPM high → low</option><option value="transpose">Transpose value</option><option value="key">Key</option></select>
+          <select id="genreFilter"><option value="all">All genres</option></select>
+          <select id="saxFilter"><option value="all">All saxes</option></select>
+          <select id="transposeFilter"><option value="all">All transpose values</option></select>
+        </div>
+        <div class="totals" id="dbTotals"></div>
+        <div class="list" id="songList"></div>
+      </div>
+    </details>
+
+    <div class="rightcol">
+      <details class="panel" id="detailPanel" open>
+        <summary>Selected Song Guide <span class="chev">▾</span></summary>
+        <div class="panel-body">
+          <div id="songDetail" class="detail-grid"></div>
+        </div>
+      </details>
+
+      <details class="panel" id="medleyPanel" open>
+        <summary>Song Medley Suggestions <span class="chev">▾</span></summary>
+        <div class="panel-body">
+          <div class="tiny" style="margin-bottom:8px">Suggestions favor same/near keys, shared chord roots, similar BPM, genre feel, and sax continuity.</div>
+          <div id="medleyList" class="medley-list"></div>
+        </div>
+      </details>
+
+      <details class="panel" id="setlistPanel" open>
+        <summary>Setlist Builder / Editor <span class="chev">▾</span></summary>
+        <div class="panel-body">
+          <div class="setlist-head">
+            <input id="setTitle" class="input" placeholder="Setlist title, e.g. Pemberton 5/30/2026" />
+            <select id="targetSelect"><option value="60">1 hour</option><option value="120">2 hours</option><option value="180">3 hours</option></select>
+          </div>
+          <div class="setlist-tools">
+            <button class="btn small gold" id="generateBtn">Randomize to Time</button>
+            <button class="btn small" data-order="medley">Medley Flow</button>
+            <button class="btn small" data-order="sax3">Sax 3× Flow</button>
+            <button class="btn small" data-order="key">Key Flow</button>
+            <button class="btn small" data-order="genre">Genre Blocks</button>
+            <button class="btn small" data-order="energy">Energy Arc</button>
+            <button class="btn small danger" id="clearSetBtn">Clear</button>
+          </div>
+          <div class="totals" id="setTotals"></div>
+          <div class="setlist" id="setlist"></div>
+          <div class="jam-form">
+            <input id="jamName" class="input" placeholder="Add song/jam name" />
+            <input id="jamArtist" class="input" placeholder="Artist / note" />
+            <input id="jamKey" class="input" placeholder="Key" />
+            <select id="jamSax"><option value="">Sax</option><option>Alto</option><option>Tenor</option><option>Soprano</option></select>
+            <input id="jamBpm" class="input" type="number" inputmode="numeric" placeholder="BPM" />
+            <input id="jamDur" class="input" placeholder="Length mm:ss" />
+            <textarea id="jamChords" class="input wide" rows="2" placeholder="Chords / core order"></textarea>
+            <button class="btn gold wide" id="addJamBtn">Add Manual Song / Jam Block</button>
+          </div>
+          <div class="setlist-tools">
+            <button class="btn small teal" id="saveLocalBtn">Save in Browser</button>
+            <button class="btn small" id="exportPngBtn">Export PNG</button>
+            <button class="btn small" id="exportPdfBtn">Export PDF / Print</button>
+          </div>
+        </div>
+      </details>
+    </div>
+  </main>
+  <nav class="bottom-tabs">
+    <button class="tabbtn active" data-jump="databasePanel">Songs</button>
+    <button class="tabbtn" data-jump="detailPanel">Guide</button>
+    <button class="tabbtn" data-jump="medleyPanel">Medley</button>
+    <button class="tabbtn" data-jump="setlistPanel">Setlist</button>
+  </nav>
+</section>
+<div id="toast" class="toast hidden"></div>
+<div id="printSheet" class="print-sheet hidden"><div id="exportPreview" class="export-preview"></div></div>
+<script>
+const SONGS = [
+  {
+    "id": "anytime-anyplace-janet-jackson",
+    "song": "Anytime, Anyplace",
+    "artist": "Janet Jackson",
+    "genre": "R&B / slow jam",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "C minor",
+    "sax": "Tenor",
+    "chords": "Intro/Verse: Cm9 | Fm9 | G7. Pre/Chorus: Abm9 | Bbm7 | Abm9 | Bbm7 | Abm9 | Db9 | Ebmaj9 | Abmaj9 | Gm7.",
+    "bpm": 65,
+    "duration": "7:08",
+    "durationSec": 428,
+    "verified": "reference"
+  },
+  {
+    "id": "ain-t-no-sunshine-bill-withers",
+    "song": "Ain't No Sunshine",
+    "artist": "Bill Withers",
+    "genre": "Soul",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "A minor",
+    "sax": "Tenor",
+    "chords": "Verse: Am7 | Em/G | G | Am7. Turnaround/bridge: Em7 | Dm7 | Am7.",
+    "bpm": 78,
+    "duration": "2:05",
+    "durationSec": 125,
+    "verified": "reference"
+  },
+  {
+    "id": "ain-t-nobody-chaka-khan",
+    "song": "Ain't Nobody",
+    "artist": "Chaka Khan",
+    "genre": "Funk / R&B",
+    "transpose": 5,
+    "transposeLabel": "+5",
+    "key": "D# minor",
+    "sax": "Alto",
+    "chords": "Main/Hook: D#m7 | C# | B | D#m7. Turn/variation: C# | B | D#m7 | A#m/F#.",
+    "bpm": 104,
+    "duration": "4:45",
+    "durationSec": 285,
+    "verified": "reference"
+  },
+  {
+    "id": "ascension-maxwell",
+    "song": "Ascension",
+    "artist": "Maxwell",
+    "genre": "Neo-soul / R&B",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "F# major",
+    "sax": "Alto",
+    "chords": "Core groove: F# | G#m | E | G#; repeat. Live charts vary; ear-check preferred version.",
+    "bpm": 96,
+    "duration": "5:45",
+    "durationSec": 345,
+    "verified": "reference"
+  },
+  {
+    "id": "black-magic-woman-santana",
+    "song": "Black Magic Woman",
+    "artist": "Santana",
+    "genre": "Latin rock / blues rock",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "D minor",
+    "sax": "",
+    "chords": "Main: Dm | Gm | Dm | A7 | Gm | Dm | A7. Latin/outro vamp: Dm | Gm | Dm | A7.",
+    "bpm": 127,
+    "duration": "3:16",
+    "durationSec": 196,
+    "verified": "reference"
+  },
+  {
+    "id": "blinding-lights-the-weeknd",
+    "song": "Blinding Lights",
+    "artist": "The Weeknd",
+    "genre": "Synth-pop / new wave",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "F minor",
+    "sax": "Alto",
+    "chords": "Main loop: Fm | Cm | Eb | Bb; repeat.",
+    "bpm": 171,
+    "duration": "3:20",
+    "durationSec": 200,
+    "verified": "reference"
+  },
+  {
+    "id": "boo-d-up-ella-mai",
+    "song": "Boo'd Up",
+    "artist": "Ella Mai",
+    "genre": "Contemporary R&B",
+    "transpose": 0,
+    "transposeLabel": "0",
+    "key": "Bb minor",
+    "sax": "Tenor",
+    "chords": "Verse/chorus core: Bbm | Gb | Cm7 | Bbm/Bbsus4; repeat. Hook centers on Bbm-Gb with Cm7/Bbsus4 pickups.",
+    "bpm": 82,
+    "duration": "4:16",
+    "durationSec": 256,
+    "verified": "reference"
+  },
+  {
+    "id": "candy-rain-soul-for-real",
+    "song": "Candy Rain",
+    "artist": "Soul for Real",
+    "genre": "R&B / new jack swing",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "B minor",
+    "sax": "Tenor",
+    "chords": "Core: Bm7 | Em7; repeat. Common alt/reference set: Em | Bm | Gm | G; bridge/turn by ear.",
+    "bpm": 94,
+    "duration": "4:34",
+    "durationSec": 274,
+    "verified": "reference"
+  },
+  {
+    "id": "can-we-talk-tevin-campbell",
+    "song": "Can We Talk",
+    "artist": "Tevin Campbell",
+    "genre": "R&B / new jack swing",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "D minor",
+    "sax": "Tenor",
+    "chords": "Intro: Am7 | Dm | Gm7 | A7sus4 A7 | Dm7. Main: Dm7 | Gm7 | Em7 | A7. Verse variations: Dm | A7 | Csus2 | G7 | Gm7 | Bb/C | Fmaj7 | A7sus4 A7.",
+    "bpm": 84,
+    "duration": "4:44",
+    "durationSec": 284,
+    "verified": "reference"
+  },
+  {
+    "id": "creep-radiohead",
+    "song": "Creep",
+    "artist": "Radiohead",
+    "genre": "Alternative rock",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "G major",
+    "sax": "Alto",
+    "chords": "Full-song loop: G | B | C | Cm; repeat.",
+    "bpm": 92,
+    "duration": "3:56",
+    "durationSec": 236,
+    "verified": "reference"
+  },
+  {
+    "id": "i-can-t-feel-my-face-the-weeknd",
+    "song": "I Can't Feel My Face",
+    "artist": "The Weeknd",
+    "genre": "Pop / funk",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "A minor",
+    "sax": "Alto",
+    "chords": "Main loop: G | F | Am | Am; repeat.",
+    "bpm": 108,
+    "duration": "3:35",
+    "durationSec": 215,
+    "verified": "reference"
+  },
+  {
+    "id": "crazy-gnarls-barkley",
+    "song": "Crazy",
+    "artist": "Gnarls Barkley",
+    "genre": "Soul / pop",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "C minor",
+    "sax": "Alto",
+    "chords": "Main loop: Cm | Eb | Ab | G; repeat.",
+    "bpm": 112,
+    "duration": "2:58",
+    "durationSec": 178,
+    "verified": "reference"
+  },
+  {
+    "id": "cruisin-d-angelo",
+    "song": "Cruisin'",
+    "artist": "D'Angelo",
+    "genre": "Neo-soul / R&B",
+    "transpose": 3,
+    "transposeLabel": "+3",
+    "key": "E major",
+    "sax": "Tenor",
+    "chords": "Core: E | F#m7 | E7 | A7. Common pass/turn: D7 | B7 | E.",
+    "bpm": 80,
+    "duration": "6:24",
+    "durationSec": 384,
+    "verified": "reference"
+  },
+  {
+    "id": "chunky-bruno-mars",
+    "song": "Chunky",
+    "artist": "Bruno Mars",
+    "genre": "Funk / R&B",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "C minor",
+    "sax": "Alto",
+    "chords": "Main: Cm | Fm | Gm | Ab; repeat.",
+    "bpm": 102,
+    "duration": "3:06",
+    "durationSec": 186,
+    "verified": "reference"
+  },
+  {
+    "id": "despacito-luis-fonsi-ft-daddy-yankee",
+    "song": "Despacito",
+    "artist": "Luis Fonsi ft. Daddy Yankee",
+    "genre": "Latin pop / reggaeton",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "B minor",
+    "sax": "Alto",
+    "chords": "Core loop: Bm | G | D | A; repeat.",
+    "bpm": 89,
+    "duration": "3:47",
+    "durationSec": 227,
+    "verified": "reference"
+  },
+  {
+    "id": "don-t-know-why-norah-jones",
+    "song": "Don't Know Why",
+    "artist": "Norah Jones",
+    "genre": "Jazz-pop / vocal jazz",
+    "transpose": -3,
+    "transposeLabel": "-3",
+    "key": "Bb major",
+    "sax": "Tenor",
+    "chords": "Verse: Bbmaj7 Bb7 | Ebmaj7 D7 | Gm7 C7 | F7 Bb. Bridge: Gm7 C7 | F7 | Gm7 C7 | F7.",
+    "bpm": 88,
+    "duration": "3:06",
+    "durationSec": 186,
+    "verified": "reference"
+  },
+  {
+    "id": "essence-wizkid",
+    "song": "Essence",
+    "artist": "Wizkid",
+    "genre": "Afrobeats / R&B",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "D minor",
+    "sax": "Tenor",
+    "chords": "Main loop: Dm7 | Em7; repeat.",
+    "bpm": 104,
+    "duration": "4:08",
+    "durationSec": 248,
+    "verified": "reference"
+  },
+  {
+    "id": "forget-me-nots-patrice-rushen",
+    "song": "Forget Me Nots",
+    "artist": "Patrice Rushen",
+    "genre": "Jazz-funk / boogie",
+    "transpose": -4,
+    "transposeLabel": "-4",
+    "key": "F# minor",
+    "sax": "Alto",
+    "chords": "Core/verse: F#m7 | Dm7 | Em | C#m7 | Dm7 | Bm7 | G#m7b5 | C#7#9. Groove centers on F#m7 with chromatic jazz-funk moves.",
+    "bpm": 114,
+    "duration": "4:42",
+    "durationSec": 282,
+    "verified": "reference"
+  },
+  {
+    "id": "feel-so-good-chuck-mangione",
+    "song": "Feel So Good",
+    "artist": "Chuck Mangione",
+    "genre": "Jazz fusion / smooth jazz",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "G major",
+    "sax": "Tenor",
+    "chords": "A: G | Em7 | Am7 | D. B: Bm7 | Em7 | Am7 | F#m7b5 | B7. Bridge: Em7 | Fmaj9 | Em7 | Fmaj9; then G | Fmaj9 | Em7 | Em/C | Am7 | Bm7 | Em/C | C#m6 | Dsus4.",
+    "bpm": 105,
+    "duration": "9:42",
+    "durationSec": 582,
+    "verified": "reference"
+  },
+  {
+    "id": "for-the-love-of-you-the-isley-brothers",
+    "song": "For the Love of You",
+    "artist": "The Isley Brothers",
+    "genre": "Soul / R&B",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "D major",
+    "sax": "Alto",
+    "chords": "Core loop: Bm7 | Gmaj7 | A7 | Dmaj7; repeat. Live versions may add F#7 | Bm7 | Gmaj7 | A7.",
+    "bpm": 96,
+    "duration": "5:38",
+    "durationSec": 338,
+    "verified": "reference"
+  },
+  {
+    "id": "how-deep-is-your-love-pj-morton",
+    "song": "How Deep Is Your Love",
+    "artist": "PJ Morton",
+    "genre": "R&B / soul",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "F# major",
+    "sax": "Tenor",
+    "chords": "Core: F# | G#m7 | Bm | A#m7. Extended movement may include Bb | Db | Gb | Ebm | Abm | Bbm | E | B | Abm | Db.",
+    "bpm": 80,
+    "duration": "4:28",
+    "durationSec": 268,
+    "verified": "reference"
+  },
+  {
+    "id": "hey-ya-outkast",
+    "song": "Hey Ya",
+    "artist": "OutKast",
+    "genre": "Pop-funk / alt hip-hop",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "G major",
+    "sax": "Alto",
+    "chords": "Full-song loop: G | C | D | Em; repeat.",
+    "bpm": 160,
+    "duration": "3:55",
+    "durationSec": 235,
+    "verified": "reference"
+  },
+  {
+    "id": "i-like-it-debarge",
+    "song": "I Like It",
+    "artist": "DeBarge",
+    "genre": "R&B / soul",
+    "transpose": 3,
+    "transposeLabel": "+3",
+    "key": "A major",
+    "sax": "Tenor",
+    "chords": "Core: Amaj7 | G#7 | C#m7 | E7. Bridge/turns often move A | B | E | Bm | E.",
+    "bpm": 97,
+    "duration": "4:40",
+    "durationSec": 280,
+    "verified": "reference"
+  },
+  {
+    "id": "i-keep-forgetting-michael-mcdonald",
+    "song": "I Keep Forgetting",
+    "artist": "Michael McDonald",
+    "genre": "Yacht rock / R&B",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "E minor",
+    "sax": "Tenor",
+    "chords": "Core groove: Em | C | F#m | Bm; repeat. Common turn: C | F#m | Bm | Em.",
+    "bpm": 96,
+    "duration": "3:42",
+    "durationSec": 222,
+    "verified": "reference"
+  },
+  {
+    "id": "joker-uptown-sundown",
+    "song": "Joker",
+    "artist": "Uptown Sundown",
+    "genre": "",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "",
+    "sax": "Alto",
+    "chords": "",
+    "bpm": 95,
+    "duration": "4:00",
+    "durationSec": 240,
+    "verified": "reference"
+  },
+  {
+    "id": "killing-me-softly-fugees",
+    "song": "Killing Me Softly",
+    "artist": "Fugees",
+    "genre": "Hip-hop soul / R&B",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "A minor",
+    "sax": "Alto",
+    "chords": "Verse/Hook core: Am | Dm | G | C | Am | D/F# | G | F | C | F | Bb | A. Common vamp/turn: Am | D | G | C | Am | D | Em.",
+    "bpm": 92,
+    "duration": "4:58",
+    "durationSec": 298,
+    "verified": "reference"
+  },
+  {
+    "id": "like-i-want-you-giveon",
+    "song": "Like I Want You",
+    "artist": "Giveon",
+    "genre": "Contemporary R&B / soul",
+    "transpose": 0,
+    "transposeLabel": "0",
+    "key": "Bb minor",
+    "sax": "Tenor",
+    "chords": "Core: Bbm | F | Ebm | F. Common chord set: Ebm7 | F7 | Bbm7 | Fm7; repeat/reharmonize by section.",
+    "bpm": 72,
+    "duration": "4:20",
+    "durationSec": 260,
+    "verified": "reference"
+  },
+  {
+    "id": "lose-control-teddy-swims",
+    "song": "Lose Control",
+    "artist": "Teddy Swims",
+    "genre": "Soul-pop / blues",
+    "transpose": -4,
+    "transposeLabel": "-4",
+    "key": "F# minor",
+    "sax": "Tenor",
+    "chords": "Core: F#m | A | D | Bm. Blues/soul variations may add E/G# or C#7 approaches before returning to F#m.",
+    "bpm": 80,
+    "duration": "3:30",
+    "durationSec": 210,
+    "verified": "reference"
+  },
+  {
+    "id": "melancholy-uptown-sundown",
+    "song": "Melancholy",
+    "artist": "Uptown Sundown",
+    "genre": "",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "",
+    "sax": "Tenor",
+    "chords": "",
+    "bpm": 80,
+    "duration": "4:00",
+    "durationSec": 240,
+    "verified": "reference"
+  },
+  {
+    "id": "mutt-leon-bridges",
+    "song": "Mutt",
+    "artist": "Leon Bridges",
+    "genre": "",
+    "transpose": -5,
+    "transposeLabel": "-5",
+    "key": "",
+    "sax": "Alto",
+    "chords": "Artist/title needs confirmation; left blank for your own chart.",
+    "bpm": 90,
+    "duration": "3:00",
+    "durationSec": 180,
+    "verified": "reference"
+  },
+  {
+    "id": "never-too-much-luther-vandross",
+    "song": "Never Too Much",
+    "artist": "Luther Vandross",
+    "genre": "R&B / post-disco",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "G major",
+    "sax": "Tenor",
+    "chords": "Intro/Verse: Gmaj7 | Em7 | G/A | A/B; repeat. Build/turn: Em7 | Em7/F# | Gmaj7 | A | A/B | Bm7. Intro walk: G/A | Gb/Ab | G/A | Ab/Bb | A/B.",
+    "bpm": 110,
+    "duration": "3:50",
+    "durationSec": 230,
+    "verified": "reference"
+  },
+  {
+    "id": "no-diggity-blackstreet",
+    "song": "No Diggity",
+    "artist": "Blackstreet",
+    "genre": "Hip-hop soul / R&B",
+    "transpose": -4,
+    "transposeLabel": "-4",
+    "key": "F# minor",
+    "sax": "Alto",
+    "chords": "Main loop: F#m | B7 | C#7; repeat.",
+    "bpm": 89,
+    "duration": "5:04",
+    "durationSec": 304,
+    "verified": "reference"
+  },
+  {
+    "id": "no-one-s-watching-ezra-collective",
+    "song": "No One's Watching",
+    "artist": "Ezra Collective",
+    "genre": "Jazz-funk / UK jazz",
+    "transpose": -3,
+    "transposeLabel": "-3",
+    "key": "G minor",
+    "sax": "Tenor",
+    "chords": "Core: Gm | Ebmaj7 | F | D. Some charts show Gm | Eb | G | C | F variations.",
+    "bpm": 100,
+    "duration": "4:38",
+    "durationSec": 278,
+    "verified": "reference"
+  },
+  {
+    "id": "on-and-on-erykah-badu",
+    "song": "On and On",
+    "artist": "Erykah Badu",
+    "genre": "Neo-soul",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "F# minor",
+    "sax": "Tenor",
+    "chords": "Core neo-soul vamp: F#m7 | G#m7 | Amaj7 | G#m7. Add passing/turn chords by ear for preferred live version.",
+    "bpm": 80,
+    "duration": "3:45",
+    "durationSec": 225,
+    "verified": "reference"
+  },
+  {
+    "id": "pyt-michael-jackson",
+    "song": "PYT",
+    "artist": "Michael Jackson",
+    "genre": "Funk / pop",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "B minor",
+    "sax": "Tenor",
+    "chords": "Main/verse: Bm | G | Bm. Pre/turn: G | F# | Bm. Chorus/vamp: Bm | E | Bm | A.",
+    "bpm": 127,
+    "duration": "3:59",
+    "durationSec": 239,
+    "verified": "reference"
+  },
+  {
+    "id": "return-of-the-mack-mark-morrison",
+    "song": "Return of the Mack",
+    "artist": "Mark Morrison",
+    "genre": "R&B / new jack swing",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "A minor",
+    "sax": "Tenor",
+    "chords": "Core: Am | Dm | G | C; repeat. Some sections use Am | G | F | E-type turnaround language depending on arrangement.",
+    "bpm": 96,
+    "duration": "3:33",
+    "durationSec": 213,
+    "verified": "reference"
+  },
+  {
+    "id": "ribbon-in-the-sky-stevie-wonder",
+    "song": "Ribbon in the Sky",
+    "artist": "Stevie Wonder",
+    "genre": "Soul ballad",
+    "transpose": 0,
+    "transposeLabel": "0",
+    "key": "Eb minor",
+    "sax": "Tenor",
+    "chords": "Opening/verse core: Ebm | Fm | Bb; repeat. Lift/turn: Ebm | Gb | Cb | Ab; later movement uses Fm | Bb | Ebm returns.",
+    "bpm": 82,
+    "duration": "5:37",
+    "durationSec": 337,
+    "verified": "reference"
+  },
+  {
+    "id": "rock-with-you-michael-jackson",
+    "song": "Rock with You",
+    "artist": "Michael Jackson",
+    "genre": "Disco / R&B",
+    "transpose": 0,
+    "transposeLabel": "0",
+    "key": "Eb minor",
+    "sax": "Alto",
+    "chords": "Intro/verse: Ebm9 | Ab/Bb Bb | Ebm9 | Ab/Bb Cb/Db. Chorus/turns move through Db-major/Bb-minor family; verify exact voicings.",
+    "bpm": 114,
+    "duration": "3:40",
+    "durationSec": 220,
+    "verified": "reference"
+  },
+  {
+    "id": "rock-steady-the-whispers",
+    "song": "Rock Steady",
+    "artist": "The Whispers",
+    "genre": "Funk / R&B",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "C# minor",
+    "sax": "Alto",
+    "chords": "Main groove: C#m7 | G#m7 | F#m7; repeat. Extended funk turns may add E/B/Cdim-type passing colors.",
+    "bpm": 111,
+    "duration": "4:58",
+    "durationSec": 298,
+    "verified": "reference"
+  },
+  {
+    "id": "everybody-wants-to-rule-the-world-robert-glasper",
+    "song": "Everybody Wants to Rule the World",
+    "artist": "Robert Glasper",
+    "genre": "Jazz/R&B cover",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "Eb major",
+    "sax": "Tenor",
+    "chords": "Core: Abmaj7 | Cm7 | Bb7 | Gm7. Live variation: Cm7 | Abmaj7 | Gm7 | Fm7.",
+    "bpm": 92,
+    "duration": "5:50",
+    "durationSec": 350,
+    "verified": "reference"
+  },
+  {
+    "id": "smells-like-teen-spirit-robert-glasper",
+    "song": "Smells Like Teen Spirit",
+    "artist": "Robert Glasper",
+    "genre": "Jazz/R&B cover",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "D minor",
+    "sax": "Alto",
+    "chords": "Core reharm: Dm9 | Bbmaj7 | Fmaj7 | A7. Simpler source loop: F | A | Dm | Bb.",
+    "bpm": 83,
+    "duration": "6:05",
+    "durationSec": 365,
+    "verified": "reference"
+  },
+  {
+    "id": "summer-madness-kool-the-gang",
+    "song": "Summer Madness",
+    "artist": "Kool & the Gang",
+    "genre": "Jazz-funk / smooth soul",
+    "transpose": 0,
+    "transposeLabel": "0",
+    "key": "F# minor",
+    "sax": "Alto",
+    "chords": "Core vamp: Bm7 | C#m7 | F#m7 | F#m; repeat.",
+    "bpm": 83,
+    "duration": "4:20",
+    "durationSec": 260,
+    "verified": "reference"
+  },
+  {
+    "id": "you-re-still-the-one-teddy-swims",
+    "song": "You're Still the One",
+    "artist": "Teddy Swims",
+    "genre": "Country-pop / soul cover",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "Db major",
+    "sax": "Tenor",
+    "chords": "Teddy Swims cover sounding core: Db | Db/F | Gb | Ab. Chorus/turn: Db | Gb | Ab | Ebm | Ab; repeat.",
+    "bpm": 132,
+    "duration": "3:33",
+    "durationSec": 213,
+    "verified": "reference"
+  },
+  {
+    "id": "sunday-morning-maroon-5",
+    "song": "Sunday Morning",
+    "artist": "Maroon 5",
+    "genre": "Pop rock / blue-eyed soul",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "C major",
+    "sax": "Alto",
+    "chords": "Main loop: Dm7 | G7 | Cmaj7; repeat. Breakdown/turn may use extra ii-V movements around C.",
+    "bpm": 88,
+    "duration": "4:04",
+    "durationSec": 244,
+    "verified": "reference"
+  },
+  {
+    "id": "superstition-stevie-wonder",
+    "song": "Superstition",
+    "artist": "Stevie Wonder",
+    "genre": "Funk / soul",
+    "transpose": 5,
+    "transposeLabel": "+5",
+    "key": "Eb minor",
+    "sax": "Tenor",
+    "chords": "Main riff/vamp: Ebm7. Chorus/turn: B7 | Bb7 | Ab7 | Gb7 | Ebm7. Common funk chart centers on Eb Dorian.",
+    "bpm": 100,
+    "duration": "4:26",
+    "durationSec": 266,
+    "verified": "reference"
+  },
+  {
+    "id": "talk-khalid",
+    "song": "Talk",
+    "artist": "Khalid",
+    "genre": "Contemporary R&B",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "C major",
+    "sax": "Alto",
+    "chords": "Core: F | Dm | Em | Dm | G; repeat. Guitar-style voicings often use Cadd9/Bm7/Bm11/Am7/D5 shapes, but sounding center is C-major family.",
+    "bpm": 136,
+    "duration": "3:18",
+    "durationSec": 198,
+    "verified": "reference"
+  },
+  {
+    "id": "use-somebody-kings-of-leon",
+    "song": "Use Somebody",
+    "artist": "Kings of Leon",
+    "genre": "Alternative rock",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "C major",
+    "sax": "Alto",
+    "chords": "Intro/Verse: C | Em | F | F. Hook/chorus: Am | C | F | F; repeat.",
+    "bpm": 138,
+    "duration": "3:51",
+    "durationSec": 231,
+    "verified": "reference"
+  },
+  {
+    "id": "valerie-amy-winehouse",
+    "song": "Valerie",
+    "artist": "Amy Winehouse",
+    "genre": "Soul / pop",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "Eb major",
+    "sax": "Tenor",
+    "chords": "Verse: Ebmaj7 | Fm7; repeat. Chorus/turn commonly moves Ab | Gm | Fm | Bb, then back to Eb/Fm.",
+    "bpm": 95,
+    "duration": "3:39",
+    "durationSec": 219,
+    "verified": "reference"
+  },
+  {
+    "id": "what-you-won-t-do-bobby-caldwell",
+    "song": "What You Won't Do",
+    "artist": "Bobby Caldwell",
+    "genre": "Yacht soul / R&B",
+    "transpose": -4,
+    "transposeLabel": "-4",
+    "key": "E major",
+    "sax": "Alto",
+    "chords": "Core intro/verse: A7add13 | A7add13b9 | G7add13(9). Common song-form harmony also moves through Bm7/E7, Amaj7, F#m7, and altered dominant turns.",
+    "bpm": 85,
+    "duration": "4:46",
+    "durationSec": 286,
+    "verified": "reference"
+  },
+  {
+    "id": "i-want-you-back-jackson-5",
+    "song": "I Want You Back",
+    "artist": "Jackson 5",
+    "genre": "Motown / soul-pop",
+    "transpose": -5,
+    "transposeLabel": "-5",
+    "key": "Ab major",
+    "sax": "Alto",
+    "chords": "Main/verse: Ab | Fm | Cm | Db; repeat. Chorus/turn: Ab | Eb | Fm | Db | Ab.",
+    "bpm": 98,
+    "duration": "2:59",
+    "durationSec": 179,
+    "verified": "reference"
+  },
+  {
+    "id": "number-33-uptown-sundown",
+    "song": "Number 33",
+    "artist": "Uptown Sundown",
+    "genre": "",
+    "transpose": -6,
+    "transposeLabel": "-6",
+    "key": "",
+    "sax": "Tenor",
+    "chords": "",
+    "bpm": 90,
+    "duration": "4:00",
+    "durationSec": 240,
+    "verified": "reference"
+  },
+  {
+    "id": "i-can-t-help-it-michael-jackson",
+    "song": "I Can't Help It",
+    "artist": "Michael Jackson",
+    "genre": "Soul / jazz-funk / R&B",
+    "transpose": 3,
+    "transposeLabel": "+3",
+    "key": "A major",
+    "sax": "Alto",
+    "chords": "Intro: Am7 | Abm7; repeat. Verse: Amaj7 | Abmaj7 | Fm9 | Bbm7 | Dbm9 | Ebsus | E | Gbm | Abm | A.",
+    "bpm": 94,
+    "duration": "4:29",
+    "durationSec": 269,
+    "verified": "reference"
+  },
+  {
+    "id": "zombie-the-cranberries",
+    "song": "Zombie",
+    "artist": "The Cranberries",
+    "genre": "Alternative rock",
+    "transpose": -6,
+    "transposeLabel": "-6",
+    "key": "E minor",
+    "sax": "Alto",
+    "chords": "Main loop: Em | C | G | D/F#; repeat.",
+    "bpm": 83,
+    "duration": "5:06",
+    "durationSec": 306,
+    "verified": "reference"
+  },
+  {
+    "id": "what-s-going-on-marvin-gaye",
+    "song": "What's Going On",
+    "artist": "Marvin Gaye",
+    "genre": "Soul / Motown",
+    "transpose": 3,
+    "transposeLabel": "+3",
+    "key": "E major",
+    "sax": "Tenor",
+    "chords": "Verse/groove: F#m7 | B7; repeat. Hook: Emaj7 | C#m7. Turn/lift: Am7 | Bsus.",
+    "bpm": 101,
+    "duration": "3:53",
+    "durationSec": 233,
+    "verified": "reference"
+  },
+  {
+    "id": "use-me-bill-withers",
+    "song": "Use Me",
+    "artist": "Bill Withers",
+    "genre": "Funk / soul",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "E minor",
+    "sax": "Tenor",
+    "chords": "Main groove: Em7 | A7; repeat.",
+    "bpm": 77,
+    "duration": "3:49",
+    "durationSec": 229,
+    "verified": "reference"
+  },
+  {
+    "id": "smooth-operator-sade",
+    "song": "Smooth Operator",
+    "artist": "Sade",
+    "genre": "Sophisti-pop / smooth jazz",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "D minor",
+    "sax": "Tenor",
+    "chords": "Verse/chorus: Dm | Am7 | Gm7 | Am7; repeat. Pre/turn: Gm7 | Am7 | Dm | Dm/Db | Am7/C | Am7/B; then A.",
+    "bpm": 120,
+    "duration": "4:58",
+    "durationSec": 298,
+    "verified": "reference"
+  },
+  {
+    "id": "the-sweetest-taboo-sade",
+    "song": "The Sweetest Taboo",
+    "artist": "Sade",
+    "genre": "Sophisti-pop / R&B",
+    "transpose": 0,
+    "transposeLabel": "0",
+    "key": "Bb minor",
+    "sax": "Alto",
+    "chords": "Main loop: Bbm | Fm | Ebm | Fm; repeat.",
+    "bpm": 90,
+    "duration": "4:37",
+    "durationSec": 277,
+    "verified": "reference"
+  },
+  {
+    "id": "remember-the-time-michael-jackson",
+    "song": "Remember the Time",
+    "artist": "Michael Jackson",
+    "genre": "New jack swing / R&B",
+    "transpose": -5,
+    "transposeLabel": "-5",
+    "key": "F minor",
+    "sax": "Alto",
+    "chords": "Main: C7 | Fm7; repeat. Common color/turn: C7 | Fm7 | C7 | Dbmaj7.",
+    "bpm": 108,
+    "duration": "4:00",
+    "durationSec": 240,
+    "verified": "reference"
+  },
+  {
+    "id": "redbone-childish-gambino",
+    "song": "Redbone",
+    "artist": "Childish Gambino",
+    "genre": "Psychedelic soul / funk",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "D minor",
+    "sax": "Alto",
+    "chords": "Verse/chorus: Bb | C | Dm; repeat. Pre/turn: Dm | Gm F | E | Dm | Gm F | E A7 | Dm.",
+    "bpm": 80,
+    "duration": "5:27",
+    "durationSec": 327,
+    "verified": "reference"
+  },
+  {
+    "id": "over-robert-glasper-feat-yebba",
+    "song": "Over",
+    "artist": "Robert Glasper feat. YEBBA",
+    "genre": "Jazz/R&B / neo-soul",
+    "transpose": 0,
+    "transposeLabel": "0",
+    "key": "Bb minor",
+    "sax": "Tenor",
+    "chords": "Core: Gb | Ab | Bbm7 | Ebm7. Common instrumental loop: Gb | Ab | Bbm7 | Ab/C; repeat.",
+    "bpm": 85,
+    "duration": "5:22",
+    "durationSec": 322,
+    "verified": "reference"
+  },
+  {
+    "id": "gorilla-bruno-mars",
+    "song": "Gorilla",
+    "artist": "Bruno Mars",
+    "genre": "R&B / rock-funk",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "D major",
+    "sax": "Alto",
+    "chords": "Verse: C | G | C | Bm | A | G | Bb | C. Pre: F#m | Bm | E | Em | G | A. Chorus: D | C | G | Bb | C; repeat.",
+    "bpm": 140,
+    "duration": "4:04",
+    "durationSec": 244,
+    "verified": "reference"
+  },
+  {
+    "id": "don-t-stop-believin-journey",
+    "song": "Don't Stop Believin'",
+    "artist": "Journey",
+    "genre": "Arena rock",
+    "transpose": 3,
+    "transposeLabel": "+3",
+    "key": "E major",
+    "sax": "Tenor",
+    "chords": "Verse: E | B | C#m | A | E | B | G#m | A. Chorus/turn: A | E | A | E | A | E | B.",
+    "bpm": 119,
+    "duration": "4:10",
+    "durationSec": 250,
+    "verified": "reference"
+  },
+  {
+    "id": "careless-whisper-george-michael",
+    "song": "Careless Whisper",
+    "artist": "George Michael",
+    "genre": "Pop / sax ballad",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "D minor",
+    "sax": "Tenor",
+    "chords": "Main/verse loop: Dm7 | Gm7 | Bbmaj7 | A7sus4 A7; repeat.",
+    "bpm": 153,
+    "duration": "5:00",
+    "durationSec": 300,
+    "verified": "reference"
+  },
+  {
+    "id": "yesterday-princess-yussef-dayes",
+    "song": "Yesterday Princess",
+    "artist": "Yussef Dayes",
+    "genre": "Jazz fusion / UK jazz",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "B minor",
+    "sax": "Alto",
+    "chords": "Core: Em7 | F#m7 | Bm7 | Em; repeat. Alternate detected set: Bm7 | Em7 | Dm7.",
+    "bpm": 92,
+    "duration": "4:50",
+    "durationSec": 290,
+    "verified": "reference"
+  },
+  {
+    "id": "what-s-love-got-to-do-with-it-tina-turner",
+    "song": "What's Love Got to Do with It",
+    "artist": "Tina Turner",
+    "genre": "Pop rock / soul",
+    "transpose": -2,
+    "transposeLabel": "-2",
+    "key": "G minor",
+    "sax": "",
+    "chords": "Verse: Gm | Eb | Bb | F; repeat. Chorus/turn commonly moves Eb | F | Gm | Eb | F | Bb.",
+    "bpm": 98,
+    "duration": "3:48",
+    "durationSec": 228,
+    "verified": "reference"
+  },
+  {
+    "id": "be-thankful-for-what-you-ve-got-william-devaughn",
+    "song": "Be Thankful for What You've Got",
+    "artist": "William DeVaughn",
+    "genre": "Soul / funk",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "F# minor",
+    "sax": "Alto",
+    "chords": "Core vamp: F#m7 | Em7 | A; repeat. Some intros/versions include Am | E/G# | C/G | D/F# | Fmaj7.",
+    "bpm": 92,
+    "duration": "7:08",
+    "durationSec": 428,
+    "verified": "reference"
+  },
+  {
+    "id": "lost-without-you-robin-thicke",
+    "song": "Lost Without You",
+    "artist": "Robin Thicke",
+    "genre": "R&B / soul ballad",
+    "transpose": -1,
+    "transposeLabel": "-1",
+    "key": "C major",
+    "sax": "Alto",
+    "chords": "Core: Dm7 | G7 | Cmaj7 | Fmaj7; repeat.",
+    "bpm": 69,
+    "duration": "4:14",
+    "durationSec": 254,
+    "verified": "reference"
+  },
+  {
+    "id": "rain-swv",
+    "song": "Rain",
+    "artist": "SWV",
+    "genre": "R&B / new jack soul",
+    "transpose": 6,
+    "transposeLabel": "+6",
+    "key": "C major",
+    "sax": "Alto",
+    "chords": "Core: Cmaj7 | Emin7 | Amin7 | F#min7; repeat. Some live voicings use Cmaj7 | Gmaj9 | Cmaj7/D | Aadd9/C# colors.",
+    "bpm": 85,
+    "duration": "4:24",
+    "durationSec": 264,
+    "verified": "reference"
+  },
+  {
+    "id": "get-you-daniel-caesar-ft-kali-uchis",
+    "song": "Get You",
+    "artist": "Daniel Caesar ft. Kali Uchis",
+    "genre": "Neo-soul / R&B",
+    "transpose": 1,
+    "transposeLabel": "+1",
+    "key": "F# minor",
+    "sax": "Tenor",
+    "chords": "Core: F#m7 | Bm7 | A7 | Em7; repeat.",
+    "bpm": 74,
+    "duration": "4:38",
+    "durationSec": 278,
+    "verified": "reference"
+  },
+  {
+    "id": "i-can-t-go-for-that-no-can-do-hall-oates",
+    "song": "I Can't Go for That (No Can Do)",
+    "artist": "Hall & Oates",
+    "genre": "Pop / R&B / blue-eyed soul",
+    "transpose": 2,
+    "transposeLabel": "+2",
+    "key": "D minor",
+    "sax": "Alto",
+    "chords": "Intro/chorus vamp: Dm9 | Am; repeat. Verse lift: A | Amaj7 | A7 | Dmaj7 D6; then back to Dm9 | Am.",
+    "bpm": 112,
+    "duration": "5:09",
+    "durationSec": 309,
+    "verified": "reference"
+  },
+  {
+    "id": "one-in-a-million-aaliyah",
+    "song": "One in a Million",
+    "artist": "Aaliyah",
+    "genre": "R&B / trip-hop",
+    "transpose": -4,
+    "transposeLabel": "-4",
+    "key": "F# minor",
+    "sax": "Alto",
+    "chords": "Core: D | Bm | F#m | D; repeat. Tonal center often treated as F# minor/D major.",
+    "bpm": 123,
+    "duration": "4:30",
+    "durationSec": 270,
+    "verified": "reference"
+  },
+  {
+    "id": "when-i-m-in-your-arms-cleo-sol",
+    "song": "When I'm in Your Arms",
+    "artist": "Cleo Sol",
+    "genre": "Soul / R&B",
+    "transpose": 4,
+    "transposeLabel": "+4",
+    "key": "A minor",
+    "sax": "Tenor",
+    "chords": "Verse: C | Dm7 | Am | Dm7 | G | Dm | Am | E7 | Am. Chorus/turn: Dsus4 | C | Dsus4 | G | E7 | A7 | Am | Cmaj7 | Am | Em | C.",
+    "bpm": 75,
+    "duration": "4:44",
+    "durationSec": 284,
+    "verified": "reference"
+  },
+  {
+    "id": "just-the-two-of-us-bill-withers-grover-washington-jr",
+    "song": "Just the Two of Us",
+    "artist": "Bill Withers / Grover Washington Jr.",
+    "genre": "Smooth soul / jazz-pop",
+    "transpose": -5,
+    "transposeLabel": "-5",
+    "key": "A minor",
+    "sax": "Tenor",
+    "chords": "Main loop: F | E7 | Am | C; repeat. Common alternate key chart: C | B7 | Em | G.",
+    "bpm": 96,
+    "duration": "7:23",
+    "durationSec": 443,
+    "verified": "reference"
+  }
+];
+const $ = (id)=>document.getElementById(id);
+const bySong = (a,b)=>a.song.localeCompare(b.song);
+let state = { selectedId: SONGS[0]?.id, buildMode:false, setlist:[], view:[], dragIndex:null };
+
+const SHARP=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const FLAT=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+const PC={ 'C':0,'B#':0,'C#':1,'Db':1,'D':2,'D#':3,'Eb':3,'E':4,'Fb':4,'E#':5,'F':5,'F#':6,'Gb':6,'G':7,'G#':8,'Ab':8,'A':9,'A#':10,'Bb':10,'B':11,'Cb':11 };
+const circle=[0,7,2,9,4,11,6,1,8,3,10,5];
+function fmtTrans(n){return n>0?'+'+n:String(n)}
+function fmtTime(sec){sec=Math.max(0,Math.round(sec||0));return Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0')}
+function parseDur(t){const m=String(t||'').match(/(\d+)\s*:\s*(\d{1,2})/);return m?Number(m[1])*60+Number(m[2]):240}
+function sanitize(s){return String(s||'setlist').replace(/[^a-z0-9_-]+/gi,'-').replace(/^-+|-+$/g,'').toLowerCase()||'setlist'}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');clearTimeout(window._toast);window._toast=setTimeout(()=>$('toast').classList.add('hidden'),1800)}
+function isFlatKey(song){return /b|♭|F minor|C minor|G minor|D minor|A minor|Eb|Bb|Ab|Db/i.test(song.key||'') && !/F#|C#|G#|D#|A#/i.test(song.key||'')}
+function noteName(pc, flat=false){return (flat?FLAT:SHARP)[((pc%12)+12)%12]}
+function keyPc(key){let m=String(key||'').trim().match(/^([A-G](?:#|b|♯|♭)?)/); if(!m)return null; return PC[m[1].replace('♯','#').replace('♭','b')] ?? null;}
+function keyMode(key){return /minor|min|m\b/i.test(key||'')?'minor':(/major|maj/i.test(key||'')?'major':'')}
+function chordRoots(chords){let set=new Set();String(chords||'').replace(/[♯]/g,'#').replace(/[♭]/g,'b').split(/[^A-G#b]+/).forEach(tok=>{if(PC[tok]!=null)set.add(PC[tok])});return set}
+function genreTokens(g){return String(g||'').toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>2 && !['and','the','pop'].includes(w));}
+function scoreRelated(a,b){if(!a||!b||a.id===b.id)return {score:-999,reasons:[]};let score=0,reasons=[];let ap=keyPc(a.key),bp=keyPc(b.key),am=keyMode(a.key),bm=keyMode(b.key);if(ap!=null&&bp!=null){let dist=Math.min((ap-bp+12)%12,(bp-ap+12)%12);if(dist===0){score+=6;reasons.push('same key center')} if(dist===7||dist===5){score+=3;reasons.push('circle-of-fifths neighbor')} if((am==='major'&&bm==='minor'&&bp===(ap+9)%12)||(am==='minor'&&bm==='major'&&bp===(ap+3)%12)){score+=4;reasons.push('relative major/minor')}}
+ if(a.sax&&b.sax&&a.sax===b.sax){score+=1.5;reasons.push('same sax')} let bpmGap=Math.abs((a.bpm||90)-(b.bpm||90)); if(bpmGap<=5){score+=2;reasons.push('tight BPM')} else if(bpmGap<=12){score+=1;reasons.push('near BPM')}
+ if(a.transpose===b.transpose){score+=1;reasons.push('same transpose')}
+ let ar=chordRoots(a.chords),br=chordRoots(b.chords),over=0;ar.forEach(x=>{if(br.has(x))over++}); if(over>=3){score+=3;reasons.push('shared chord roots')} else if(over>=1){score+=1;reasons.push('some chord overlap')}
+ let gt=new Set(genreTokens(a.genre)); let shared=genreTokens(b.genre).filter(x=>gt.has(x)); if(shared.length){score+=1.2;reasons.push('genre feel: '+shared.slice(0,2).join('/'))}
+ return {score,reasons};}
+function getSong(id){return SONGS.find(s=>s.id===id)}
+function saveSet(){localStorage.setItem('uptownSetlist', JSON.stringify({title:$('setTitle').value,setlist:state.setlist}))}
+function loadSet(){try{let v=JSON.parse(localStorage.getItem('uptownSetlist')||'{}');if(v.title)$('setTitle').value=v.title;if(Array.isArray(v.setlist))state.setlist=v.setlist;}catch(e){}}
+function initFilters(){let genres=[...new Set(SONGS.map(s=>s.genre).filter(Boolean).map(g=>g.split('/')[0].trim()))].sort();let saxes=[...new Set(SONGS.map(s=>s.sax).filter(Boolean))].sort();let trans=[...new Set(SONGS.map(s=>s.transpose))].sort((a,b)=>a-b);genres.forEach(g=>$('genreFilter').insertAdjacentHTML('beforeend',`<option value="${g}">${g}</option>`));saxes.forEach(g=>$('saxFilter').insertAdjacentHTML('beforeend',`<option value="${g}">${g}</option>`));trans.forEach(n=>$('transposeFilter').insertAdjacentHTML('beforeend',`<option value="${n}">${fmtTrans(n)}</option>`));}
+function filteredSongs(){let q=$('searchInput').value.trim().toLowerCase();let genre=$('genreFilter').value,sax=$('saxFilter').value,tr=$('transposeFilter').value;let arr=SONGS.filter(s=>{
+ let hay=[s.song,s.artist,s.genre,s.key,s.sax,s.chords,fmtTrans(s.transpose),s.bpm,s.duration].join(' ').toLowerCase();
+ return (!q||hay.includes(q))&&(genre==='all'||s.genre.startsWith(genre))&&(sax==='all'||s.sax===sax)&&(tr==='all'||String(s.transpose)===tr);
+});
+let sort=$('sortSelect').value;arr.sort((a,b)=> sort==='genre'? (a.genre+a.song).localeCompare(b.genre+b.song): sort==='sax'? (a.sax+a.song).localeCompare(b.sax+b.song): sort==='bpm'? (a.bpm-b.bpm)||bySong(a,b): sort==='bpmDesc'? (b.bpm-a.bpm)||bySong(a,b): sort==='transpose'? (a.transpose-b.transpose)||bySong(a,b): sort==='key'? (a.key+a.song).localeCompare(b.key+b.song): bySong(a,b));
+return arr;}
+function renderStatus(){let total=SONGS.length;let selected=getSong(state.selectedId);$('statusLine').innerHTML=`<span class="pill">${total} songs</span><span class="pill">Setlist: ${state.setlist.length}</span><span class="pill">${fmtTime(state.setlist.reduce((a,s)=>a+(s.durationSec||0),0))}</span>${selected?`<span class="pill">Selected: ${selected.song}</span>`:''}`;}
+function renderSongList(){let arr=filteredSongs();state.view=arr;$('dbTotals').innerHTML=`<span class="pill">Showing ${arr.length}</span><span class="pill">Build mode ${state.buildMode?'ON':'OFF'}</span>`;
+$('songList').innerHTML=arr.map(s=>`<article class="song-card" data-id="${s.id}"><div class="song-main"><div><div class="song-title">${escapeHtml(s.song)}</div><div class="song-artist">${escapeHtml(s.artist||'—')}</div></div><div class="transpose-badge">${fmtTrans(s.transpose)}</div></div><div class="song-meta"><span class="pill">${escapeHtml(s.key||'Key —')}</span><span class="pill">${escapeHtml(s.sax||'Sax —')}</span><span class="pill">${s.bpm} BPM</span><span class="pill">${s.duration}</span></div><div class="song-actions"><button class="btn small" data-action="select">Guide</button><button class="btn small gold" data-action="add">Add</button></div></article>`).join('');
+$('songList').querySelectorAll('.song-card').forEach(card=>{card.addEventListener('click',e=>{let id=card.dataset.id;let action=e.target.dataset.action;if(action==='add'||state.buildMode){addSongToSet(id);e.stopPropagation();return;}selectSong(id);});});renderStatus();}
+function escapeHtml(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function selectSong(id){state.selectedId=id;renderDetail();renderMedley();renderSongList();document.querySelector('#detailPanel').open=true;}
+function renderDetail(){let s=getSong(state.selectedId); if(!s){$('songDetail').innerHTML='<div class="tiny">Select a song to see the guide.</div>';return;}
+ let piano=renderPiano(s); $('songDetail').innerHTML=`<div><h2 style="margin:0 0 2px">${escapeHtml(s.song)}</h2><div class="tiny">${escapeHtml(s.artist||'No artist listed')}</div></div><div class="info-table"><b>Transpose</b><span>${fmtTrans(s.transpose)}</span><b>Key</b><span>${escapeHtml(s.key||'—')}</span><b>Sax</b><span>${escapeHtml(s.sax||'—')}</span><b>Genre</b><span>${escapeHtml(s.genre||'—')}</span><b>BPM / Time</b><span>${s.bpm} BPM • ${s.duration}</span></div><div><b style="color:#ffe6a4">Sounding chords / core order</b><div class="chordbox">${escapeHtml(s.chords||'Add your own chord notes here.')}</div></div><details class="piano-wrap" open><summary style="font-weight:900;color:#d7fff7;margin-bottom:8px">12-Key Transposed Piano Reference</summary><div class="tiny" style="margin-bottom:7px">Labels show the note that comes out of the keyboard with transpose set to <b>${fmtTrans(s.transpose)}</b>. Use this to call out the correct sounding root notes live.</div>${piano}</details><button class="btn gold" onclick="addSongToSet('${s.id}')">Add This Song to Setlist</button>`;}
+function renderPiano(s){let flat=isFlatKey(s);let keys=SHARP.map((phys,i)=>{let sound=noteName(i+s.transpose,flat);let black=[1,3,6,8,10].includes(i);return `<div class="key ${black?'black':'white'}"><span class="phys">Key ${phys}</span><span class="sound">${sound}</span><span class="phys">sounds</span></div>`}).join('');return `<div class="piano">${keys}</div>`}
+function renderMedley(){let s=getSong(state.selectedId);if(!s){$('medleyList').innerHTML='';return;}let ranked=SONGS.map(x=>({song:x,...scoreRelated(s,x)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,8);$('medleyList').innerHTML=ranked.map(x=>`<div class="suggestion"><div style="display:flex;justify-content:space-between;gap:8px"><b>${escapeHtml(x.song.song)}</b><span class="pill">${Math.round(x.score*10)/10}</span></div><div class="tiny">${escapeHtml(x.song.artist)} • ${escapeHtml(x.song.key||'—')} • ${escapeHtml(x.song.sax||'—')} • ${x.song.bpm} BPM</div><div class="tiny" style="margin-top:5px">${escapeHtml(x.reasons.join(' • ')||'related feel')}</div><button class="btn small gold" style="margin-top:7px" onclick="addSongToSet('${x.song.id}')">Add to setlist</button></div>`).join('')||'<div class="tiny">No suggestions yet.</div>';}
+function addSongToSet(id){let s=getSong(id);if(!s)return;state.setlist.push({...s,uid:'u'+Date.now()+Math.random().toString(16).slice(2)});renderSetlist();saveSet();toast('Added: '+s.song);}
+function renderSetlist(){let total=state.setlist.reduce((a,s)=>a+(s.durationSec||0),0);let target=Number($('targetSelect').value)*60;let diff=total-target;$('setTotals').innerHTML=`<span class="pill">${state.setlist.length} songs</span><span class="pill">Total ${fmtTime(total)}</span><span class="pill">Target ${fmtTime(target)}</span><span class="pill">${diff>=0?'+':''}${fmtTime(Math.abs(diff))} ${diff>=0?'over':'under'}</span>`;
+$('setlist').innerHTML=state.setlist.map((s,i)=>`<div class="setitem" draggable="true" data-i="${i}"><div class="handle">☰</div><div><div class="set-title">${i+1}. ${escapeHtml(s.song)}</div><div class="set-sub">${escapeHtml(s.artist||'—')} • ${escapeHtml(s.key||'Key —')} • ${s.bpm||'—'} BPM • ${escapeHtml(s.sax||'Sax —')} • ${s.duration||fmtTime(s.durationSec)}</div></div><div class="set-buttons"><button class="btn small" onclick="moveSet(${i},-1)">↑</button><button class="btn small" onclick="moveSet(${i},1)">↓</button><button class="btn small danger" onclick="removeSet(${i})">×</button></div><div class="set-chords">${escapeHtml(s.chords||'')}</div></div>`).join('')||'<div class="tiny">Use Build Mode, Add buttons, Randomize, or Add Manual Song/Jam Block to start a setlist.</div>';
+$('setlist').querySelectorAll('.setitem').forEach(item=>{item.addEventListener('dragstart',()=>{state.dragIndex=Number(item.dataset.i);item.classList.add('dragging')});item.addEventListener('dragend',()=>item.classList.remove('dragging'));item.addEventListener('dragover',e=>e.preventDefault());item.addEventListener('drop',e=>{e.preventDefault();let to=Number(item.dataset.i);let from=state.dragIndex;if(from===to||from==null)return;let [m]=state.setlist.splice(from,1);state.setlist.splice(to,0,m);state.dragIndex=null;renderSetlist();saveSet();});});renderStatus();}
+window.moveSet=function(i,dir){let j=i+dir;if(j<0||j>=state.setlist.length)return;[state.setlist[i],state.setlist[j]]=[state.setlist[j],state.setlist[i]];renderSetlist();saveSet();}
+window.removeSet=function(i){state.setlist.splice(i,1);renderSetlist();saveSet();}
+function generateSetlist(){let target=Number($('targetSelect').value)*60;let pool=[...SONGS].filter(s=>s.durationSec>0).sort(()=>Math.random()-.5);let picked=[],total=0,guard=0;while(total<target-120 && pool.length && guard++<400){let remaining=target-total;let idx=pool.findIndex(s=>s.durationSec<=remaining+120);if(idx<0)idx=0;let [s]=pool.splice(idx,1);picked.push({...s,uid:'u'+Date.now()+Math.random().toString(16).slice(2)});total+=s.durationSec;}state.setlist=picked;renderSetlist();saveSet();toast('Random setlist generated');}
+function orderSet(type){if(!state.setlist.length)return;let arr=[...state.setlist];if(type==='genre')arr.sort((a,b)=>(a.genre+a.song).localeCompare(b.genre+b.song));
+ if(type==='key')arr.sort((a,b)=>{let ai=circle.indexOf(keyPc(a.key));let bi=circle.indexOf(keyPc(b.key));return (ai<0?99:ai)-(bi<0?99:bi)||bySong(a,b)});
+ if(type==='energy'){let sorted=arr.sort((a,b)=>(a.bpm||90)-(b.bpm||90));let low=sorted.slice(0,Math.ceil(sorted.length/2));let high=sorted.slice(Math.ceil(sorted.length/2)).reverse();arr=[];while(low.length||high.length){if(low.length)arr.push(low.shift());if(high.length)arr.push(high.shift());}}
+ if(type==='sax3'){let order=['Alto','Tenor','Soprano'];let buckets={};order.forEach(k=>buckets[k]=arr.filter(s=>s.sax===k));buckets.Other=arr.filter(s=>!order.includes(s.sax));arr=[];let again=true;while(again){again=false;for(let k of order){let chunk=buckets[k].splice(0,3);if(chunk.length){arr.push(...chunk);again=true;}}}arr.push(...buckets.Other);}
+ if(type==='medley'){let out=[arr.shift()];while(arr.length){let prev=out[out.length-1];let best=0,bestScore=-999;arr.forEach((s,i)=>{let sc=scoreRelated(prev,s).score;if(sc>bestScore){bestScore=sc;best=i;}});out.push(arr.splice(best,1)[0]);}arr=out;}
+ state.setlist=arr;renderSetlist();saveSet();toast('Setlist organized');}
+function addJam(){let name=$('jamName').value.trim();if(!name){toast('Add a song or jam name first');return;}let dur=$('jamDur').value.trim()||'4:00';let s={id:'custom-'+Date.now(),uid:'u'+Date.now(),song:name,artist:$('jamArtist').value.trim(),genre:'Custom / Jam',transpose:0,transposeLabel:'0',key:$('jamKey').value.trim(),sax:$('jamSax').value,bpm:Number($('jamBpm').value)||90,duration:dur,durationSec:parseDur(dur),chords:$('jamChords').value.trim()};state.setlist.push(s);['jamName','jamArtist','jamKey','jamBpm','jamDur','jamChords'].forEach(id=>$(id).value='');$('jamSax').value='';renderSetlist();saveSet();}
+function buildExportHtml(){let title=$('setTitle').value.trim()||'Uptown Sundown Setlist';let total=state.setlist.reduce((a,s)=>a+(s.durationSec||0),0);let rows=state.setlist.map((s,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(s.song)}</b><br>${escapeHtml(s.artist||'')}</td><td>${escapeHtml(s.key||'')}</td><td>${escapeHtml(s.sax||'')}</td><td>${s.bpm||''}</td><td class="ch">${escapeHtml(s.chords||'')}</td></tr>`).join('');return `<h1>${escapeHtml(title)}</h1><div class="meta">Uptown Sundown • ${state.setlist.length} songs • Est. ${fmtTime(total)} total • Generated ${new Date().toLocaleString()}</div><table><thead><tr><th>#</th><th>Song / Artist</th><th>Key</th><th>Sax</th><th>BPM</th><th>Chords</th></tr></thead><tbody>${rows}</tbody></table>`;}
+function exportPNG(){if(!state.setlist.length){toast('Build a setlist first');return;}$('exportPreview').innerHTML=buildExportHtml();let title=$('setTitle').value.trim()||'Uptown Sundown Setlist';let rows=state.setlist;let width=1600,pad=60,rowMin=58;let ctx=document.createElement('canvas').getContext('2d');ctx.canvas.width=width;ctx.font='24px Arial';function wrap(text,max){let words=String(text||'').split(/\s+/),lines=[],line='';words.forEach(w=>{let test=line?line+' '+w:w;if(ctx.measureText(test).width>max&&line){lines.push(line);line=w}else line=test});if(line)lines.push(line);return lines;}
+ let rowHeights=rows.map(s=>Math.max(rowMin, 24*(wrap(s.chords,640).length)+38));let height=pad*2+90+rowHeights.reduce((a,b)=>a+b,0)+45;let canvas=ctx.canvas;canvas.height=height;ctx.fillStyle='#fffaf0';ctx.fillRect(0,0,width,height);ctx.fillStyle='#120b16';ctx.font='bold 44px Arial';ctx.fillText(title, pad, 68);ctx.font='22px Arial';ctx.fillStyle='#555';ctx.fillText(`Uptown Sundown • ${rows.length} songs • Est. ${fmtTime(rows.reduce((a,s)=>a+(s.durationSec||0),0))} total`, pad, 104);
+ let y=135;ctx.fillStyle='#120b16';ctx.fillRect(pad,y,width-pad*2,36);ctx.fillStyle='#fff';ctx.font='bold 18px Arial';['#','Song / Artist','Key','Sax','BPM','Chords'].forEach((h,i)=>ctx.fillText(h,[pad+12,pad+70,pad+470,pad+610,pad+730,pad+820][i],y+24));y+=36;ctx.font='18px Arial';
+ rows.forEach((s,i)=>{let h=rowHeights[i];ctx.strokeStyle='#c8b27a';ctx.strokeRect(pad,y,width-pad*2,h);ctx.fillStyle=i%2?'#fff3d9':'#ffffff';ctx.fillRect(pad+1,y+1,width-pad*2-2,h-2);ctx.fillStyle='#111';ctx.font='18px Arial';ctx.fillText(String(i+1),pad+12,y+26);ctx.font='bold 19px Arial';ctx.fillText(s.song,pad+70,y+26);ctx.font='16px Arial';ctx.fillStyle='#555';ctx.fillText(s.artist||'',pad+70,y+49);ctx.fillStyle='#111';ctx.font='18px Arial';ctx.fillText(s.key||'',pad+470,y+26);ctx.fillText(s.sax||'',pad+610,y+26);ctx.fillText(String(s.bpm||''),pad+730,y+26);let lines=wrap(s.chords||'',700);lines.forEach((ln,k)=>ctx.fillText(ln,pad+820,y+25+k*22));y+=h;});
+ let a=document.createElement('a');a.download=sanitize(title)+'.png';a.href=canvas.toDataURL('image/png');a.click();toast('PNG exported');}
+function exportPDF(){if(!state.setlist.length){toast('Build a setlist first');return;}$('exportPreview').innerHTML=buildExportHtml();$('printSheet').classList.remove('hidden');setTimeout(()=>window.print(),80);}
+window.addEventListener('afterprint',()=>$('printSheet').classList.add('hidden'));
+function wire(){ $('launchBtn').onclick=()=>{$('home').classList.add('hidden');$('app').classList.remove('hidden');};$('homeBtn').onclick=()=>{$('app').classList.add('hidden');$('home').classList.remove('hidden');};$('buildBtn').onclick=()=>{state.buildMode=!state.buildMode;$('buildBtn').textContent='Build: '+(state.buildMode?'On':'Off');$('buildBtn').classList.toggle('active',state.buildMode);renderSongList();};$('quickSetBtn').onclick=()=>document.getElementById('setlistPanel').scrollIntoView({behavior:'smooth'});
+ ['searchInput','sortSelect','genreFilter','saxFilter','transposeFilter'].forEach(id=>$(id).addEventListener('input',renderSongList));$('targetSelect').addEventListener('change',renderSetlist);$('generateBtn').onclick=generateSetlist;$('clearSetBtn').onclick=()=>{state.setlist=[];renderSetlist();saveSet();};$('addJamBtn').onclick=addJam;$('saveLocalBtn').onclick=()=>{saveSet();toast('Saved in this browser');};$('exportPngBtn').onclick=exportPNG;$('exportPdfBtn').onclick=exportPDF;document.querySelectorAll('[data-order]').forEach(b=>b.onclick=()=>orderSet(b.dataset.order));document.querySelectorAll('.tabbtn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');let p=$(b.dataset.jump);p.open=true;p.scrollIntoView({behavior:'smooth',block:'start'});});}
+initFilters();loadSet();wire();renderSongList();renderDetail();renderMedley();renderSetlist();
+</script>
+</body>
+</html>
